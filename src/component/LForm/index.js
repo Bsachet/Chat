@@ -6,6 +6,10 @@ import Button from '../Button';
 //import { useNavigate} from "react-router-dom";
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthenticatedApp } from './../../component/AuthenticatedApp';
+import { UnauthenticatedApp } from './../../component/UnauthenticatedApp';
+import { useAuth } from './../../hooks/useAuth';
+
 
 const LForm = (props) => {
  // const navigate = useNavigate();
@@ -15,31 +19,9 @@ const LForm = (props) => {
 
   const onSave = async (event) => {
     event.preventDefault()
-//    const response = await axios.get(
-//        ' ', {
-//        params: { usuario: name, senha: password }
-//    }).catch(function (error) {
-//        if (error.response) {
-//          alert("Login ou Senha Incorreto(s)")
-//          console.log(error.response.data);
-//          console.log(error.response.status);
-//          console.log(error.response.headers);
-//        } else if (error.request) {
-//          console.log(error.request);
-//        } else {
-//          console.log('Erro! ', error.message);
-//        }
-    
-//      });
-
-//    if (response.status == 200) {
-     
-//       navigate('/home');
-//       alert("Sucesso")
-       
-//   } 
-
 }
+
+const { user } = useAuth();
 
   return (
     <div className="container">
@@ -69,8 +51,9 @@ const LForm = (props) => {
           onChange={value => setDomain(value)}
         />
 
-        <Button><Link to="Home"> Entrar </Link></Button>
+        <Button> Entrar </Button>
 
+        {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
       
       </form>
       
