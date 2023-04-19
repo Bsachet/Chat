@@ -31,8 +31,7 @@ const Login = () => {
           <button>Sign in</button>
           {err && <span>Algo deu errado!</span>}
         </form>
-        <p>Não tem uma conta? Contate o Administrador.</p>
-      </div>
+       </div>
     </div>
   );
 };
