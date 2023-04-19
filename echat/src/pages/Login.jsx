@@ -1,58 +1,40 @@
-import React from 'react'
-import logo from '../img/logo.png'
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 
 const Login = () => {
+  const [err, setErr] = useState(false);
+  const navigate = useNavigate();
 
-  //console reagindo ao form
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const email = e.target[0].value;
     const password = e.target[1].value;
 
-
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user)
-
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      });
-
-    /*  await setDoc(doc(db, "users", res.user.uid)),{
-        uid: res.user.uid,
-        email,
-        
-      }
-    */
-
-
-
-    //fecha reação    
-  }
-
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/")
+    } catch (err) {
+      setErr(true);
+    }
+  };
   return (
-    <div className='formContainer'>
-      <div className='formWrapper'>
-        <img src={logo} alt="logo"></img>
-        <span className='logo'>&Chat</span>
+    <div className="formContainer">
+      <div className="formWrapper">
+        <span className="logo">&Chat</span>
+        <span className="title">Login</span>
 
         <form onSubmit={handleSubmit}>
-          <input type="email" placeholder='email' />
-          <input type="password" placeholder='senha' />
-
-          <button>Entrar</button>
+          <input type="email" placeholder="email" />
+          <input type="password" placeholder="password" />
+          <button>Sign in</button>
+          {err && <span>Algo deu errado!</span>}
         </form>
-
+        <p>Não tem uma conta? Contate o Administrador.</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
