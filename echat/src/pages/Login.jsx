@@ -18,23 +18,23 @@ const Login = () => {
         // Signed in
         const user = userCredential.user;
         console.log(user)
-      
+
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
       });
 
-      await setDoc(doc(db, "users", res.user.uid)),{
+    /*  await setDoc(doc(db, "users", res.user.uid)),{
         uid: res.user.uid,
         email,
         
       }
+    */
 
 
 
-
-  //fecha reação    
+    //fecha reação    
   }
 
   return (
