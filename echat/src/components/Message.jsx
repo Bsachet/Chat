@@ -26,7 +26,9 @@ const Message = ({ message }) => {
           }
           alt=""
         />
-        <span>agora</span>
+
+
+
       </div>
       <div className="messageContent">
         <p>{message.text}</p>
@@ -35,5 +37,7 @@ const Message = ({ message }) => {
     </div>
   );
 };
+
+//After <img>, there was a <span> with the time, "just now", but was just text. 
 
 export default Message;

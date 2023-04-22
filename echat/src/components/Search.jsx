@@ -12,7 +12,6 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
-
 const Search = () => {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
@@ -22,7 +21,7 @@ const Search = () => {
 
   const handleSearch = async () => {
     const q = query(
-      doc(collection(db, "users")),
+      collection(db, "users"),
       where("displayName", "==", username)
     );
 
@@ -72,12 +71,11 @@ const Search = () => {
           [combinedId + ".date"]: serverTimestamp(),
         });
       }
-    } catch (err) { }
+    } catch (err) {}
 
     setUser(null);
     setUsername("")
   };
-
   return (
     <div className="search">
       <div className="searchForm">
@@ -89,7 +87,7 @@ const Search = () => {
           value={username}
         />
       </div>
-      {err && <span>Usuário não encontrado!</span>}
+      {err && <span>User not found!</span>}
       {user && (
         <div className="userChat" onClick={handleSelect}>
           <img src={user.photoURL} alt="" />
@@ -99,7 +97,7 @@ const Search = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;
