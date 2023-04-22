@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import logo from "../img/logo.png";
 
 const Login = () => {
   const [err, setErr] = useState(false);
@@ -12,6 +13,7 @@ const Login = () => {
     const email = e.target[0].value;
     const password = e.target[1].value;
 
+    //checagem de login, navigate to home page
     try {
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/")
@@ -22,17 +24,15 @@ const Login = () => {
   return (
     <div className="formContainer">
       <div className="formWrapper">
+        <img src={logo} alt=""/>
         <span className="logo">&Chat</span>
-        <span className="title">Login</span>
-
         <form onSubmit={handleSubmit}>
           <input type="email" placeholder="email" />
           <input type="password" placeholder="password" />
           <button>Sign in</button>
           {err && <span>Algo deu errado!</span>}
         </form>
-        <p>Não tem uma conta? Contate o Administrador.</p>
-      </div>
+       </div>
     </div>
   );
 };
