@@ -21,22 +21,22 @@ const Register = () => {
     const file = e.target[3].files[0];
 
     try {
-      //Create user
+      //Criar usuário
       const res = await createUserWithEmailAndPassword(auth, email, password);
 
-      //Create a unique image name
+      //Criar id imagem
       const date = new Date().getTime();
       const storageRef = ref(storage, `${displayName + date}`);
 
       await uploadBytesResumable(storageRef, file).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
-            //Update profile
+            //Autalizar perfil
             await updateProfile(res.user, {
               displayName,
               photoURL: downloadURL,
             });
-            //create user on firestore
+            //Criar usuário - firestore
             await setDoc(doc(db, "users", res.user.uid), {
               uid: res.user.uid,
               displayName,
@@ -44,7 +44,7 @@ const Register = () => {
               photoURL: downloadURL,
             });
 
-            //create empty user chats on firestore
+            //Criar chat vazio - firestore
             await setDoc(doc(db, "userChats", res.user.uid), {});
             navigate("/");
           } catch (err) {
@@ -75,7 +75,7 @@ const Register = () => {
             <img src={Add} alt="" />
             <span>Add um avatar</span>
           </label>
-          <button disabled={loading}>Sign up</button>
+          <button disabled={loading}>Criar</button>
           {loading && "Uploading..."}
           {err && <span>Algo deu errado.</span>}
         </form>

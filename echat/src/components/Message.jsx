@@ -38,6 +38,5 @@ const Message = ({ message }) => {
   );
 };
 
-//After <img>, there was a <span> with the time, "just now", but was just text. 
 
 export default Message;

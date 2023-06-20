@@ -13,7 +13,7 @@ const Login = () => {
     const email = e.target[0].value;
     const password = e.target[1].value;
 
-    //checagem de login, navigate to home page
+    //Verificar login, nevegar para home page
     try {
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/")
