@@ -79,9 +79,7 @@ const Register = () => {
           {loading && "Uploading..."}
           {err && <span>Algo deu errado.</span>}
         </form>
-        <p>
-          Já tem uma conta? <Link to="/login">Login</Link>
-        </p>
+        
       </div>
     </div>
   );
